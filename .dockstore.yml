@@ -1,0 +1,7 @@
+version: 1.2
+workflows:
+ - name: MultiQC_PE
+   subclass: WDL
+   primaryDescriptorPath: /workflows/multiqc_pe.wdl
+   testParameterFiles:
+    - empty.json
