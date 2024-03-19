@@ -19,14 +19,14 @@ workflow multi_qc_pe {
     call fastqc.fastqc_task as fqc1 {
   	  input: 
   	    read = file1.left,
-  	    samplename = file1.right
+  	    samplename = file1.right + "_1"
     }
   }
   scatter (file2 in zip(read2, samplenames)) {
     call fastqc.fastqc_task as fqc2 {
   	  input: 
   	    read = file2.left,
-  	    samplename = file2.right
+  	    samplename = file2.right + "_2"
 	}
   }
   call multiqc.multiqc_task as r1_aggregate {
