@@ -42,7 +42,7 @@ workflow multi_qc_pe {
   output {
     File read1_multiqc_report = r1_aggregate.report
     File read2_multiqc_report = r2_aggregate.report
-    String fastqc_docker = fqc1.fastqc_docker
+    String fastqc_docker = fqc1.fastqc_docker[0]
     String multiqc_docker = r1_aggregate.multiqc_docker
   }
 }
