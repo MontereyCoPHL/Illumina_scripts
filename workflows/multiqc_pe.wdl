@@ -10,23 +10,20 @@ workflow multi_qc_pe {
   input {
     Array[File] read1
     Array[File] read2
-    Array[String] samplenames
     String out_name
     String r1_out_name = out_name + "_read1"
     String r2_out_name = out_name + "_read2"
   }
-  scatter (file1 in zip(read1, samplenames)) {
+  scatter (file1 in read1) {
     call fastqc.fastqc_task as fqc1 {
   	  input: 
-  	    read = file1.left,
-  	    samplename = file1.right + "_1"
+  	    read = file1
     }
   }
-  scatter (file2 in zip(read2, samplenames)) {
+  scatter (file2 in read2) {
     call fastqc.fastqc_task as fqc2 {
   	  input: 
-  	    read = file2.left,
-  	    samplename = file2.right + "_2"
+  	    read = file2
 	}
   }
   call multiqc.multiqc_task as r1_aggregate {

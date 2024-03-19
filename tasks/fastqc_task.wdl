@@ -12,18 +12,13 @@ task fastqc_task {
 
     #fastqc params
     File read
-    String samplename
-    #String out_zip = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.zip")
-    #String out_html = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.html")
   }
   command <<<
     fastqc ~{read}
   >>>
   output {
-    #File report_zip = out_zip
-    #File report_html = out_html
-    File report_zip = "~{samplename}_fastqc.zip"
-    File report_html = "~{samplename}_fastqc.html"
+    File report_zip = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.zip")
+    File report_html = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.html")
     String fastqc_docker = docker
   }
   runtime {
