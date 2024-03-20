@@ -15,7 +15,6 @@ task fastqc_task {
   }
   command <<<
     fastqc ~{read} -o .
-    ls
   >>>
   output {
     File report_zip = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.zip")
