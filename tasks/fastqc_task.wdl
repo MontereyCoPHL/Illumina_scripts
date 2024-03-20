@@ -14,12 +14,12 @@ task fastqc_task {
     File read
   }
   command <<<
-    fastqc ~{read}
+    fastqc ~{read} -o /data
     ls
   >>>
   output {
-    File report_zip = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.zip")
-    File report_html = sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.html")
+    File report_zip = "/data/" + sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.zip")
+    File report_html = "/data/" + sub(basename(read, ".gz"), "\\.fastq*", "_fastqc.html")
     String fastqc_docker = docker
   }
   runtime {
